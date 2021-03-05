@@ -5,7 +5,8 @@
             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
             ios:Page.UseSafeArea="False"
             BackgroundColor="{DynamicResource PrimaryColor}"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:dualScreen="clr-namespace:Xamarin.Forms.DualScreen;assembly=Xamarin.Forms.DualScreen">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -31,7 +32,11 @@
         </OnPlatform>
     </ContentPage.Padding>
 
-    <Grid Padding="16" RowSpacing="0" ColumnSpacing="0"
+    <dualScreen:TwoPaneView
+        MinTallModeHeight="680"
+        MinWideModeWidth="540">
+        <dualScreen:TwoPaneView.Pane1>
+            <Grid Padding="16" RowSpacing="0" ColumnSpacing="0"
           RowDefinitions="2*,*,*,*,*,*"
           ColumnDefinitions="*,*,*,*"
           >
@@ -111,8 +116,19 @@
         <Button x:Name="ThemeSwitcher"
                 Clicked="ThemeSwitcher_Clicked"
                 Grid.ColumnSpan="4"
-                
                 />
 
     </Grid>
+            
+        </dualScreen:TwoPaneView.Pane1>
+        <dualScreen:TwoPaneView.Pane2>
+            <StackLayout Padding="16">
+                <Label FontSize="22"
+                       HorizontalTextAlignment="Right"
+                       TextColor="{DynamicResource SecondaryColor}"
+                       x:Name="history"
+                       />
+            </StackLayout>
+        </dualScreen:TwoPaneView.Pane2>
+    </dualScreen:TwoPaneView>
 </ContentPage>

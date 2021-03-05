@@ -63,6 +63,7 @@ namespace SimpleCalculator
             secondNumber = 0;
             currentState = 1;
             this.resultText.Text = "0";
+            this.history.Text = "";
         }
 
         void OnCalculate(object sender, EventArgs e)
@@ -72,11 +73,13 @@ namespace SimpleCalculator
                 double result = Calculator.Calculate(firstNumber, secondNumber, mathOperator);
 
                 this.CurrentCalculation.Text = $"{firstNumber} {mathOperator} {secondNumber}";
+                this.history.Text += $"\n{firstNumber} {mathOperator} {secondNumber}";
 
                 this.resultText.Text = result.ToTrimmedString();
+                this.history.Text += $"\n{result.ToTrimmedString()}";
+
                 firstNumber = result;
                 currentState = -1;
-
                 
             }
         }
